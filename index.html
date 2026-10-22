@@ -394,7 +394,60 @@
         </div>
     </section>
 
-    <!-- Testimonials Section -->
+        <!-- Media Gallery Section (Video & Images) -->
+    <section id="media-gallery" class="py-24 bg-darkbg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-roseaccent text-xs font-bold tracking-widest uppercase bg-roseaccent/10 px-3 py-1 rounded-full border border-roseaccent/20">Visual Journey</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-white mt-4 mb-4">Style In Motion</h2>
+                <p class="text-gray-400">Watch our transformations come to life or browse our latest creative work.</p>
+            </div>
+
+            <!-- Main Video Player Display (Hidden by default) -->
+            <div id="video-player-container" class="hidden mb-10 aspect-video rounded-2xl overflow-hidden border-4 border-roseaccent shadow-2xl shadow-roseaccent/20">
+                <iframe id="main-video-frame" class="w-full h-full" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+
+            <!-- Gallery Grid (Mix of Images and Video Thumbnails) -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div onclick="playVideo('dQw4w9WgXcQ')" class="relative group cursor-pointer overflow-hidden rounded-xl aspect-square bg-softgray border border-softgray shadow-lg">
+                    <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg" alt="Video Thumbnail 1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-darkbg/50 group-hover:bg-darkbg/20 transition-colors flex items-center justify-center">
+                        <div class="w-16 h-16 rounded-full bg-roseaccent/80 flex items-center justify-center shadow-xl shadow-darkbg/50 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-play text-white text-2xl pl-1"></i>
+                        </div>
+                    </div>
+                    <span class="absolute bottom-2 left-2 bg-darkbg/80 text-roseaccent text-[10px] font-bold px-2 py-0.5 rounded">VIDEO</span>
+                </div>
+
+                <div class="relative group overflow-hidden rounded-xl aspect-square bg-softgray border border-softgray shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=800&q=80" alt="Gallery Image 1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkbg/80 via-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3">
+                        <h5 class="text-white font-semibold text-sm">Vibrant Color Melt</h5>
+                    </div>
+                </div>
+
+                <div onclick="playVideo('dQw4w9WgXcQ')" class="relative group cursor-pointer overflow-hidden rounded-xl aspect-square bg-softgray border border-softgray shadow-lg">
+                    <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg" alt="Video Thumbnail 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-darkbg/50 group-hover:bg-darkbg/20 transition-colors flex items-center justify-center">
+                        <div class="w-16 h-16 rounded-full bg-roseaccent/80 flex items-center justify-center shadow-xl shadow-darkbg/50 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-play text-white text-2xl pl-1"></i>
+                        </div>
+                    </div>
+                    <span class="absolute bottom-2 left-2 bg-darkbg/80 text-roseaccent text-[10px] font-bold px-2 py-0.5 rounded">VIDEO</span>
+                </div>
+
+                <div class="relative group overflow-hidden rounded-xl aspect-square bg-softgray border border-softgray shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80" alt="Gallery Image 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkbg/80 via-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3">
+                        <h5 class="text-white font-semibold text-sm">Precision Fade & Sculpt</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Testimonials Section -->
     <section id="testimonials" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-16">
             <span class="text-roseaccent text-xs font-bold tracking-widest uppercase bg-roseaccent/10 px-3 py-1 rounded-full border border-roseaccent/20">Testimonials</span>
