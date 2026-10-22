@@ -528,6 +528,58 @@
         </div>
     </section>
 
+    <!-- Write a Review Section -->
+    <section id="write-review" class="py-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-cardbg border border-softgray rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden">
+            <div class="absolute -top-24 -right-24 w-48 h-48 bg-roseaccent/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="text-center max-w-xl mx-auto mb-10">
+                <span class="text-roseaccent text-xs font-bold tracking-widest uppercase bg-roseaccent/10 px-3 py-1 rounded-full border border-roseaccent/20">Share Your Experience</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-white mt-3 mb-2">Leave a Review</h2>
+                <p class="text-gray-400 text-sm">We value your feedback! Let us and others know how your visit went at Rosebowl Salon.</p>
+            </div>
+
+            <form action="https://api.web3forms.com/submit" method="POST" class="space-y-6">
+                <input type="hidden" name="access_key" value="f8116cc0-5f64-40ec-a6e4-41f296810524">
+                <input type="hidden" name="subject" value="New Customer Review - Rosebowl Salon">
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-gray-400 mb-2">Your Name</label>
+                        <input type="text" name="name" required class="w-full bg-darkbg border border-softgray rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-roseaccent transition-colors" placeholder="e.g., Samantha Miller">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-gray-400 mb-2">Rating</label>
+                        <select name="rating" required class="w-full bg-darkbg border border-softgray rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-roseaccent transition-colors">
+                            <option value="5 Stars" selected>⭐⭐⭐⭐⭐ (5/5 Stars)</option>
+                            <option value="4 Stars">⭐⭐⭐⭐ (4/5 Stars)</option>
+                            <option value="3 Stars">⭐⭐⭐ (3/5 Stars)</option>
+                            <option value="2 Stars">⭐⭐ (2/5 Stars)</option>
+                            <option value="1 Star">⭐ (1/5 Star)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-gray-400 mb-2">Your Email</label>
+                    <input type="email" name="email" required class="w-full bg-darkbg border border-softgray rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-roseaccent transition-colors" placeholder="your@email.com">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-gray-400 mb-2">Your Review</label>
+                    <textarea name="message" rows="4" required class="w-full bg-darkbg border border-softgray rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-roseaccent transition-colors" placeholder="Tell us about your haircut, spa treatment, or experience..."></textarea>
+                </div>
+
+                <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+                <button type="submit" class="w-full bg-roseaccent hover:bg-rose-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-roseaccent/30 transition-all">
+                    Submit Your Review
+                </button>
+            </form>
+        </div>
+    </section>
+
+
     <!-- Footer -->
     <footer class="bg-darkbg border-t border-softgray/50 py-12 text-center text-xs text-gray-400">
         <p>&copy; 2026 Rosebowl Salon. All Rights Reserved.</p>
