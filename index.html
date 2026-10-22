@@ -404,14 +404,19 @@
             </div>
 
             <!-- Main Video Player Display (Hidden by default) -->
-            <div id="video-player-container" class="hidden mb-10 aspect-video rounded-2xl overflow-hidden border-4 border-roseaccent shadow-2xl shadow-roseaccent/20">
+            
+            <div id="video-player-container" class="hidden mb-10 aspect-video rounded-2xl overflow-hidden border-4 border-roseaccent shadow-2xl shadow-roseaccent/20 bg-black">
+                <video id="main-local-video" class="w-full h-full object-contain" controls autoplay></video>
+            </div>
+
                 <iframe id="main-video-frame" class="w-full h-full" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
 
-            <!-- Gallery Grid (Mix of Images and Video Thumbnails) -->
+                        <!-- Gallery Grid (All Salon Photos & Video) -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div onclick="playVideo('dQw4w9WgXcQ')" class="relative group cursor-pointer overflow-hidden rounded-xl aspect-square bg-softgray border border-softgray shadow-lg">
-                    <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg" alt="Video Thumbnail 1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <!-- Video Item -->
+                <div onclick="playLocalVideo('images/salon-vibe.mp4')" class="relative group cursor-pointer overflow-hidden rounded-xl aspect-square bg-softgray border border-softgray shadow-lg">
+                    <video src="images/salon-vibe.mp4" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 muted"></video>
                     <div class="absolute inset-0 bg-darkbg/50 group-hover:bg-darkbg/20 transition-colors flex items-center justify-center">
                         <div class="w-16 h-16 rounded-full bg-roseaccent/80 flex items-center justify-center shadow-xl shadow-darkbg/50 group-hover:scale-110 transition-transform">
                             <i class="fa-solid fa-play text-white text-2xl pl-1"></i>
@@ -420,34 +425,65 @@
                     <span class="absolute bottom-2 left-2 bg-darkbg/80 text-roseaccent text-[10px] font-bold px-2 py-0.5 rounded">VIDEO</span>
                 </div>
 
+                <!-- Image 1 -->
                 <div class="relative group overflow-hidden rounded-xl aspect-square bg-softgray border border-softgray shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=800&q=80" alt="Gallery Image 1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <img src="images/barber-session.jpg" alt="Barber Session" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                     <div class="absolute inset-0 bg-gradient-to-t from-darkbg/80 via-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3">
-                        <h5 class="text-white font-semibold text-sm">Vibrant Color Melt</h5>
+                        <h5 class="text-white font-semibold text-sm">Precision Barbering</h5>
                     </div>
                 </div>
 
-                <div onclick="playVideo('dQw4w9WgXcQ')" class="relative group cursor-pointer overflow-hidden rounded-xl aspect-square bg-softgray border border-softgray shadow-lg">
-                    <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg" alt="Video Thumbnail 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                    <div class="absolute inset-0 bg-darkbg/50 group-hover:bg-darkbg/20 transition-colors flex items-center justify-center">
-                        <div class="w-16 h-16 rounded-full bg-roseaccent/80 flex items-center justify-center shadow-xl shadow-darkbg/50 group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-play text-white text-2xl pl-1"></i>
-                        </div>
+                <!-- Image 2 -->
+                <div class="relative group overflow-hidden rounded-xl aspect-square bg-softgray border border-softgray shadow-lg">
+                    <img src="images/braiding-session.jpg" alt="Braiding Session" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkbg/80 via-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3">
+                        <h5 class="text-white font-semibold text-sm">Expert Braiding</h5>
                     </div>
-                    <span class="absolute bottom-2 left-2 bg-darkbg/80 text-roseaccent text-[10px] font-bold px-2 py-0.5 rounded">VIDEO</span>
                 </div>
 
+                <!-- Image 3 -->
                 <div class="relative group overflow-hidden rounded-xl aspect-square bg-softgray border border-softgray shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80" alt="Gallery Image 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <img src="images/braid-detail.jpg" alt="Braid Detail" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                     <div class="absolute inset-0 bg-gradient-to-t from-darkbg/80 via-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3">
-                        <h5 class="text-white font-semibold text-sm">Precision Fade & Sculpt</h5>
+                        <h5 class="text-white font-semibold text-sm">Intricate Parting & Braids</h5>
+                    </div>
+                </div>
+
+                <!-- Image 4 -->
+                <div class="relative group overflow-hidden rounded-xl aspect-square bg-softgray border border-softgray shadow-lg">
+                    <img src="images/salon-interior-waiting.jpg" alt="Salon Interior" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkbg/80 via-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3">
+                        <h5 class="text-white font-semibold text-sm">Client Lounge</h5>
+                    </div>
+                </div>
+
+                <!-- Image 5 -->
+                <div class="relative group overflow-hidden rounded-xl aspect-square bg-softgray border border-softgray shadow-lg">
+                    <img src="images/salon-styling.jpg" alt="Salon Styling" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkbg/80 via-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3">
+                        <h5 class="text-white font-semibold text-sm">Styling Station</h5>
+                    </div>
+                </div>
+
+                <!-- Image 6 -->
+                <div class="relative group overflow-hidden rounded-xl aspect-square bg-softgray border border-softgray shadow-lg">
+                    <img src="images/salon-ambience-1.jpg" alt="Salon Ambience 1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkbg/80 via-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3">
+                        <h5 class="text-white font-semibold text-sm">Salon Atmosphere</h5>
+                    </div>
+                </div>
+
+                <!-- Image 7 -->
+                <div class="relative group overflow-hidden rounded-xl aspect-square bg-softgray border border-softgray shadow-lg">
+                    <img src="images/salon-ambience-2.jpg" alt="Salon Ambience 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkbg/80 via-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3">
+                        <h5 class="text-white font-semibold text-sm">Interior View</h5>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-<!-- Testimonials Section -->
+        </div>
+    </section><!-- Testimonials Section -->
     <section id="testimonials" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-16">
             <span class="text-roseaccent text-xs font-bold tracking-widest uppercase bg-roseaccent/10 px-3 py-1 rounded-full border border-roseaccent/20">Testimonials</span>
