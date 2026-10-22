@@ -48,8 +48,29 @@ nav a:hover {
 }
 
 .services-section, .hours-section {
-    padding: 40px 20px;
+    padding: 60px 20px;
     text-align: center;
+    background-color: #0a0a0a;
+}
+
+.services-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.service-card {
+    background: #111;
+    border: 1px solid #333;
+    padding: 20px;
+    width: 280px;
+    border-radius: 6px;
+}
+
+.service-card h3 {
+    color: #fa3019;
 }
 
 .btn {
@@ -74,13 +95,8 @@ footer {
     background-color: #111;
     color: #aaa;
     text-align: center;
-    padding: 30px 20px;
+    padding: 40px 20px;
     border-top: 1px solid #333;
-}
-
-footer a {
-    color: #fa3019;
-    text-decoration: none;
 }
 
 .social-links {
