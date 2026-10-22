@@ -12,6 +12,22 @@ header {
     padding: 20px;
     text-align: center;
     border-bottom: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.site-logo {
+    height: 45px;
+    width: auto;
+    object-fit: contain;
 }
 
 nav a {
@@ -25,17 +41,9 @@ nav a:hover {
     color: #fa3019;
 }
 
-.banner {
-    background-color: #fff;
-    color: #000;
-    text-align: center;
-    padding: 10px;
-    font-weight: bold;
-}
-
 .hero {
     text-align: center;
-    padding: 80px 20px;
+    padding: 100px 20px;
 }
 
 .hero h1 {
@@ -47,7 +55,7 @@ nav a:hover {
     padding: 20px;
 }
 
-.services-section, .hours-section {
+.services-section, .hours-section, .gallery-section {
     padding: 60px 20px;
     text-align: center;
     background-color: #0a0a0a;
@@ -71,6 +79,23 @@ nav a:hover {
 
 .service-card h3 {
     color: #fa3019;
+}
+
+.gallery-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.gallery-img {
+    max-width: 400px;
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border: 1px solid #333;
+    border-radius: 6px;
 }
 
 .btn {
