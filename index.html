@@ -1,94 +1,729 @@
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Rosebowl Salon | Hair Stylists, Barbers & Spa Services in Berlin</title>
-    <meta name="description" content="Professional hair stylists, barbers, and spa services in Berlin. Book your appointment with Rosebowl Salon today.">
-    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rosebowl Salon | Hair, Barber & Spa</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        roseaccent: '#fe005c',
+                        darkbg: '#121212',
+                        cardbg: '#1a1a1a',
+                        softgray: '#2a2a2a'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Google+Sans:400,500|Roboto:300,400,500,700|Source+Code+Pro:400,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Bungee+Shade&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Spectral:400,600,700&display=swap" rel="stylesheet">
-
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #121212;
+            color: #e5e7eb;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #121212;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2a2a2a;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #fe005c;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-darkbg text-gray-100 antialiased selection:bg-roseaccent selection:text-white">
 
-    <!-- Header & Navigation -->
-    <header>
-        <div class="logo-container">
-            <h2 class="site-title">rosebowlsalon.com</h2>
+    <!-- Notification Banner for actions -->
+    <div id="notification" class="fixed top-20 right-5 z-50 transform translate-x-full transition-transform duration-300 bg-cardbg border border-roseaccent text-white px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3">
+        <i class="fa-solid fa-circle-check text-roseaccent text-xl"></i>
+        <div>
+            <h4 class="font-bold text-sm" id="notif-title">Success</h4>
+            <p class="text-xs text-gray-400" id="notif-desc">Action completed successfully.</p>
         </div>
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#services">Services</a>
-            <a href="#gallery">Gallery</a>
-            <a href="#contact">Contact & Hours</a>
-            <a href="https://www.linkedin.com/in/chifru19" target="_blank">LinkedIn</a>
-        </nav>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 left-0 w-full z-40 bg-darkbg/90 backdrop-blur-md border-b border-softgray/50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-2 group">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-roseaccent to-pink-500 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-roseaccent/20 group-hover:scale-105 transition-transform">
+                    R
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-bold tracking-wider text-lg text-white">ROSEBOWL</span>
+                    <span class="text-[10px] tracking-widest text-roseaccent font-semibold uppercase">Salon & Spa</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation Links -->
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#home" class="hover:text-roseaccent transition-colors">Home</a>
+                <a href="#services" class="hover:text-roseaccent transition-colors">Services & Pricing</a>
+                <a href="#gallery" class="hover:text-roseaccent transition-colors">Portfolio</a>
+                <a href="#testimonials" class="hover:text-roseaccent transition-colors">Reviews</a>
+                <a href="#contact" class="hover:text-roseaccent transition-colors">Contact & Hours</a>
+            </div>
+
+            <!-- CTA Button -->
+            <div class="hidden md:flex items-center gap-4">
+                <a href="tel:03055126551" class="text-sm font-medium hover:text-roseaccent transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-phone text-roseaccent"></i> 030-55126551
+                </a>
+                <button onclick="openBookingModal()" class="bg-roseaccent hover:bg-rose-600 text-white px-5 py-2.5 rounded-full text-sm font-semibold shadow-lg shadow-roseaccent/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0">
+                    Book Appointment
+                </button>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button onclick="toggleMobileMenu()" class="md:hidden text-gray-300 hover:text-white focus:outline-none text-2xl p-2">
+                <i class="fa-solid fa-bars" id="menu-icon"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-cardbg border-b border-softgray px-4 pt-2 pb-6 space-y-3">
+            <a href="#home" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium hover:text-roseaccent">Home</a>
+            <a href="#services" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium hover:text-roseaccent">Services & Pricing</a>
+            <a href="#gallery" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium hover:text-roseaccent">Portfolio</a>
+            <a href="#testimonials" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium hover:text-roseaccent">Reviews</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium hover:text-roseaccent">Contact & Hours</a>
+            <div class="pt-4 border-t border-softgray flex flex-col gap-3">
+                <a href="tel:03055126551" class="flex items-center gap-2 text-sm text-gray-300">
+                    <i class="fa-solid fa-phone text-roseaccent"></i> 030-55126551
+                </a>
+                <button onclick="toggleMobileMenu(); openBookingModal();" class="w-full bg-roseaccent text-white py-3 rounded-xl font-semibold shadow-lg shadow-roseaccent/30">
+                    Book Appointment
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <!-- Background Overlay Image -->
+        <div class="absolute inset-0 z-0 opacity-30 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1920&q=80');"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-darkbg via-darkbg/70 to-transparent z-0"></div>
+
+        <div class="relative z-10 max-w-5xl mx-auto px-4 text-center py-20">
+            <span class="inline-block bg-roseaccent/10 border border-roseaccent/30 text-roseaccent px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase mb-6 shadow-inner">
+                Premier Salon & Barbershop
+            </span>
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+                Redefine Your Style at <span class="text-transparent bg-clip-text bg-gradient-to-r from-roseaccent to-pink-400">Rosebowl</span>
+            </h1>
+            <p class="max-w-2xl mx-auto text-base sm:text-lg text-gray-400 mb-10">
+                Experience world-class hair styling, precision barbering, and rejuvenating spa treatments tailored exclusively to elevate your natural look.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <button onclick="openBookingModal()" class="w-full sm:w-auto bg-roseaccent hover:bg-rose-600 text-white px-8 py-4 rounded-full font-bold shadow-xl shadow-roseaccent/30 transition-all transform hover:-translate-y-1">
+                    Book Your Session Now
+                </button>
+                <a href="#services" class="w-full sm:w-auto bg-cardbg hover:bg-softgray border border-softgray text-white px-8 py-4 rounded-full font-bold transition-all">
+                    Explore Services
+                </a>
+            </div>
+
+            <!-- Quick highlights -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 mt-16 pt-12 border-t border-softgray/50 max-w-3xl mx-auto text-left">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-cardbg border border-softgray flex items-center justify-center text-roseaccent">
+                        <i class="fa-solid fa-award text-lg"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-bold text-white">Expert Stylists</h4>
+                        <p class="text-xs text-gray-400">Certified professionals</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-cardbg border border-softgray flex items-center justify-center text-roseaccent">
+                        <i class="fa-solid fa-spa text-lg"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-bold text-white">Premium Spa</h4>
+                        <p class="text-xs text-gray-400">Pure relaxation</p>
+                    </div>
+                </div>
+                <div class="col-span-2 md:col-span-1 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-cardbg border border-softgray flex items-center justify-center text-roseaccent">
+                        <i class="fa-solid fa-star text-lg"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-bold text-white">Top Rated</h4>
+                        <p class="text-xs text-gray-400">Over 500+ reviews</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
 
-    <!-- Main Content -->
-    <main>
-        <section class="hero" id="home">
-            <div class="hero-content">
-                <h1>The Rosebowl Salon Experience</h1>
-                <p>Professional Hair Stylists, Barbers, and Spa Services in Berlin.</p>
-                <br>
-                <a href="#contact" class="btn">Schedule An Appointment</a>
-            </div>
-        </section>
-
-        <section class="services-section" id="services">
-            <h2>Our Services</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>Hair Stylists</h3>
-                    <p>Expert cuts, coloring, styling, and treatments tailored to you.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Barbers</h3>
-                    <p>Precision fades, classic cuts, and beard grooming services.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Spa Services</h3>
-                    <p>Relaxing treatments designed to refresh and rejuvenate.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Gallery Section -->
-        <section class="gallery-section" id="gallery">
-            <h2>Salon Gallery</h2>
-            <div class="gallery-grid">
-                <div class="gallery-placeholder">Rosebowl Salon Atmosphere</div>
-                <div class="gallery-placeholder">Interior & Styling Chairs</div>
-            </div>
-        </section>
-
-        <section class="hours-section" id="contact">
-            <h2>Hours & Contact</h2>
-            <p><strong>Monday - Friday:</strong> 10AM – 7PM</p>
-            <p><strong>Saturday:</strong> 10AM – 1PM</p>
-            <p><strong>Sunday:</strong> Online Appointment Only</p>
-            <h3>Call To Book An Appointment: <a href="tel:03055126551" style="color: #fa3019; text-decoration: none;">030-55126551</a></h3>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <div class="social-links">
-            <a href="https://www.instagram.com/rosebowlsalon/" target="_blank">Instagram</a>
-            <a href="https://www.facebook.com/rose.hamm.7796" target="_blank">Facebook</a>
-            <a href="https://www.linkedin.com/in/chifru19" target="_blank">LinkedIn</a>
+    <!-- Services & Pricing Section -->
+    <section id="services" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="text-roseaccent text-xs font-bold tracking-widest uppercase bg-roseaccent/10 px-3 py-1 rounded-full border border-roseaccent/20">Our Menu</span>
+            <h2 class="text-3xl sm:text-4xl font-bold text-white mt-4 mb-4">Services & Transparent Pricing</h2>
+            <p class="text-gray-400">Choose from our specialized categories designed for ultimate grooming and wellness.</p>
         </div>
 
-        <p style="margin-top: 20px; font-size: 0.9rem;">COPYRIGHT © 2026 ROSEBOWL SALON. ALL RIGHTS RESERVED.</p>
+        <!-- Category Tabs -->
+        <div class="flex justify-center gap-2 sm:gap-4 mb-12 flex-wrap">
+            <button onclick="switchTab('hair')" id="tab-hair" class="px-6 py-3 rounded-full text-sm font-semibold transition-all bg-roseaccent text-white shadow-lg shadow-roseaccent/20">
+                <i class="fa-solid fa-scissors mr-2"></i> Hair Styling
+            </button>
+            <button onclick="switchTab('barber')" id="tab-barber" class="px-6 py-3 rounded-full text-sm font-semibold transition-all bg-cardbg border border-softgray text-gray-300 hover:text-white">
+                <i class="fa-solid fa-user-tie mr-2"></i> Barbershop
+            </button>
+            <button onclick="switchTab('spa')" id="tab-spa" class="px-6 py-3 rounded-full text-sm font-semibold transition-all bg-cardbg border border-softgray text-gray-300 hover:text-white">
+                <i class="fa-solid fa-spa mr-2"></i> Spa & Treatments
+            </button>
+        </div>
+
+        <!-- Tab Content Containers -->
+        <div id="content-hair" class="service-panel grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Service 1 -->
+            <div class="bg-cardbg border border-softgray rounded-2xl p-6 flex flex-col justify-between hover:border-roseaccent/50 transition-all group">
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-bold text-white group-hover:text-roseaccent transition-colors">Signature Haircut & Style</h3>
+                        <span class="text-roseaccent font-bold text-lg">$65</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-6">Consultation, precision haircut, shampoo wash, relaxing scalp massage, and professional blow dry finish.</p>
+                </div>
+                <div class="flex items-center justify-between pt-4 border-t border-softgray">
+                    <span class="text-xs text-gray-500"><i class="fa-regular fa-clock mr-1"></i> 45 mins</span>
+                    <button onclick="openBookingModalService('Signature Haircut & Style', '$65')" class="bg-softgray hover:bg-roseaccent text-white text-xs font-semibold px-4 py-2 rounded-xl transition-all">Select</button>
+                </div>
+            </div>
+            <!-- Service 2 -->
+            <div class="bg-cardbg border border-softgray rounded-2xl p-6 flex flex-col justify-between hover:border-roseaccent/50 transition-all group">
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-bold text-white group-hover:text-roseaccent transition-colors">Full Color & Highlights</h3>
+                        <span class="text-roseaccent font-bold text-lg">$140+</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-6">Custom coloring technique tailored to your skin tone, using premium ammonia-free products for maximum shine.</p>
+                </div>
+                <div class="flex items-center justify-between pt-4 border-t border-softgray">
+                    <span class="text-xs text-gray-500"><i class="fa-regular fa-clock mr-1"></i> 120 mins</span>
+                    <button onclick="openBookingModalService('Full Color & Highlights', '$140+')" class="bg-softgray hover:bg-roseaccent text-white text-xs font-semibold px-4 py-2 rounded-xl transition-all">Select</button>
+                </div>
+            </div>
+            <!-- Service 3 -->
+            <div class="bg-cardbg border border-softgray rounded-2xl p-6 flex flex-col justify-between hover:border-roseaccent/50 transition-all group">
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-bold text-white group-hover:text-roseaccent transition-colors">Keratin Smoothing Treatment</h3>
+                        <span class="text-roseaccent font-bold text-lg">$200+</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-6">Deep conditioning keratin infusion that eliminates frizz, adds brilliant gloss, and eases daily styling.</p>
+                </div>
+                <div class="flex items-center justify-between pt-4 border-t border-softgray">
+                    <span class="text-xs text-gray-500"><i class="fa-regular fa-clock mr-1"></i> 150 mins</span>
+                    <button onclick="openBookingModalService('Keratin Smoothing Treatment', '$200+')" class="bg-softgray hover:bg-roseaccent text-white text-xs font-semibold px-4 py-2 rounded-xl transition-all">Select</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="content-barber" class="service-panel hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Barber Service 1 -->
+            <div class="bg-cardbg border border-softgray rounded-2xl p-6 flex flex-col justify-between hover:border-roseaccent/50 transition-all group">
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-bold text-white group-hover:text-roseaccent transition-colors">Classic Gentlemen's Cut</h3>
+                        <span class="text-roseaccent font-bold text-lg">$45</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-6">Tailored scissor or clipper haircut, hot lather neck shave, and expert styling finish with pomade.</p>
+                </div>
+                <div class="flex items-center justify-between pt-4 border-t border-softgray">
+                    <span class="text-xs text-gray-500"><i class="fa-regular fa-clock mr-1"></i> 30 mins</span>
+                    <button onclick="openBookingModalService('Classic Gentlemen\'s Cut', '$45')" class="bg-softgray hover:bg-roseaccent text-white text-xs font-semibold px-4 py-2 rounded-xl transition-all">Select</button>
+                </div>
+            </div>
+            <!-- Barber Service 2 -->
+            <div class="bg-cardbg border border-softgray rounded-2xl p-6 flex flex-col justify-between hover:border-roseaccent/50 transition-all group">
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-bold text-white group-hover:text-roseaccent transition-colors">Hot Towel Beard Trim</h3>
+                        <span class="text-roseaccent font-bold text-lg">$35</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-6">Beard shaping, straight razor edge lineup, soothing hot eucalyptus towel, and premium beard oil treatment.</p>
+                </div>
+                <div class="flex items-center justify-between pt-4 border-t border-softgray">
+                    <span class="text-xs text-gray-500"><i class="fa-regular fa-clock mr-1"></i> 30 mins</span>
+                    <button onclick="openBookingModalService('Hot Towel Beard Trim', '$35')" class="bg-softgray hover:bg-roseaccent text-white text-xs font-semibold px-4 py-2 rounded-xl transition-all">Select</button>
+                </div>
+            </div>
+            <!-- Barber Service 3 -->
+            <div class="bg-cardbg border border-softgray rounded-2xl p-6 flex flex-col justify-between hover:border-roseaccent/50 transition-all group">
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-bold text-white group-hover:text-roseaccent transition-colors">The Ultimate Royal Combo</h3>
+                        <span class="text-roseaccent font-bold text-lg">$75</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-6">Full haircut plus beard sculpt, complete with facial steamer, hot towels, and refreshing tonic finish.</p>
+                </div>
+                <div class="flex items-center justify-between pt-4 border-t border-softgray">
+                    <span class="text-xs text-gray-500"><i class="fa-regular fa-clock mr-1"></i> 60 mins</span>
+                    <button onclick="openBookingModalService('The Ultimate Royal Combo', '$75')" class="bg-softgray hover:bg-roseaccent text-white text-xs font-semibold px-4 py-2 rounded-xl transition-all">Select</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="content-spa" class="service-panel hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Spa Service 1 -->
+            <div class="bg-cardbg border border-softgray rounded-2xl p-6 flex flex-col justify-between hover:border-roseaccent/50 transition-all group">
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-bold text-white group-hover:text-roseaccent transition-colors">Rejuvenating Facial</h3>
+                        <span class="text-roseaccent font-bold text-lg">$85</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-6">Deep pore cleansing, gentle botanical exfoliation, customized serum infusion, and relaxing facial massage.</p>
+                </div>
+                <div class="flex items-center justify-between pt-4 border-t border-softgray">
+                    <span class="text-xs text-gray-500"><i class="fa-regular fa-clock mr-1"></i> 60 mins</span>
+                    <button onclick="openBookingModalService('Rejuvenating Facial', '$85')" class="bg-softgray hover:bg-roseaccent text-white text-xs font-semibold px-4 py-2 rounded-xl transition-all">Select</button>
+                </div>
+            </div>
+            <!-- Spa Service 2 -->
+            <div class="bg-cardbg border border-softgray rounded-2xl p-6 flex flex-col justify-between hover:border-roseaccent/50 transition-all group">
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-bold text-white group-hover:text-roseaccent transition-colors">Aromatherapy Scalp Massage</h3>
+                        <span class="text-roseaccent font-bold text-lg">$50</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-6">Therapeutic essential oil massage targeting tension points in the scalp, neck, and shoulders to relieve stress.</p>
+                </div>
+                <div class="flex items-center justify-between pt-4 border-t border-softgray">
+                    <span class="text-xs text-gray-500"><i class="fa-regular fa-clock mr-1"></i> 30 mins</span>
+                    <button onclick="openBookingModalService('Aromatherapy Scalp Massage', '$50')" class="bg-softgray hover:bg-roseaccent text-white text-xs font-semibold px-4 py-2 rounded-xl transition-all">Select</button>
+                </div>
+            </div>
+            <!-- Spa Service 3 -->
+            <div class="bg-cardbg border border-softgray rounded-2xl p-6 flex flex-col justify-between hover:border-roseaccent/50 transition-all group">
+                <div>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-bold text-white group-hover:text-roseaccent transition-colors">Rosebowl Luxury Spa Package</h3>
+                        <span class="text-roseaccent font-bold text-lg">$160</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-6">Comprehensive wellness package including organic facial, aromatherapy scalp massage, and hydrating hand treatment.</p>
+                </div>
+                <div class="flex items-center justify-between pt-4 border-t border-softgray">
+                    <span class="text-xs text-gray-500"><i class="fa-regular fa-clock mr-1"></i> 100 mins</span>
+                    <button onclick="openBookingModalService('Rosebowl Luxury Spa Package', '$160')" class="bg-softgray hover:bg-roseaccent text-white text-xs font-semibold px-4 py-2 rounded-xl transition-all">Select</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery / Portfolio Section -->
+    <section id="gallery" class="py-24 bg-cardbg/50 border-y border-softgray/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-roseaccent text-xs font-bold tracking-widest uppercase bg-roseaccent/10 px-3 py-1 rounded-full border border-roseaccent/20">Our Work</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-white mt-4 mb-4">Portfolio Showcase</h2>
+                <p class="text-gray-400">A glimpse into recent haircuts, color transformations, and styling performed by our master artists.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Gallery Item 1 -->
+                <div class="relative group overflow-hidden rounded-2xl aspect-square bg-softgray">
+                    <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=800&q=80" alt="Modern Styling" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkbg/90 via-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-6">
+                        <span class="text-roseaccent text-xs font-bold tracking-wider uppercase">Hair Styling</span>
+                        <h4 class="text-white font-bold text-lg">Modern Layered Cut & Tone</h4>
+                    </div>
+                </div>
+                <!-- Gallery Item 2 -->
+                <div class="relative group overflow-hidden rounded-2xl aspect-square bg-softgray">
+                    <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80" alt="Barber Fade" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkbg/90 via-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-6">
+                        <span class="text-roseaccent text-xs font-bold tracking-wider uppercase">Barbershop</span>
+                        <h4 class="text-white font-bold text-lg">Precision Skin Fade & Beard Sculpt</h4>
+                    </div>
+                </div>
+                <!-- Gallery Item 3 -->
+                <div class="relative group overflow-hidden rounded-2xl aspect-square bg-softgray">
+                    <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80" alt="Balayage Color" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkbg/90 via-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-6">
+                        <span class="text-roseaccent text-xs font-bold tracking-wider uppercase">Color Treatment</span>
+                        <h4 class="text-white font-bold text-lg">Caramel Balayage & Gloss</h4>
+                    </div>
+                </div>
+                <!-- Gallery Item 4 -->
+                <div class="relative group overflow-hidden rounded-2xl aspect-square bg-softgray">
+                    <img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=800&q=80" alt="Spa Treatment" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkbg/90 via-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-6">
+                        <span class="text-roseaccent text-xs font-bold tracking-wider uppercase">Spa & Wellness</span>
+                        <h4 class="text-white font-bold text-lg">Relaxing Organic Facial</h4>
+                    </div>
+                </div>
+                <!-- Gallery Item 5 -->
+                <div class="relative group overflow-hidden rounded-2xl aspect-square bg-softgray">
+                    <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=800&q=80" alt="Bridal Styling" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkbg/90 via-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-6">
+                        <span class="text-roseaccent text-xs font-bold tracking-wider uppercase">Special Event</span>
+                        <h4 class="text-white font-bold text-lg">Bridal & Evening Updo</h4>
+                    </div>
+                </div>
+                <!-- Gallery Item 6 -->
+                <div class="relative group overflow-hidden rounded-2xl aspect-square bg-softgray">
+                    <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=800&q=80" alt="Classic Cut" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-darkbg/90 via-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-6">
+                        <span class="text-roseaccent text-xs font-bold tracking-wider uppercase">Barbershop</span>
+                        <h4 class="text-white font-bold text-lg">Executive Scissor Crop</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="text-roseaccent text-xs font-bold tracking-widest uppercase bg-roseaccent/10 px-3 py-1 rounded-full border border-roseaccent/20">Testimonials</span>
+            <h2 class="text-3xl sm:text-4xl font-bold text-white mt-4 mb-4">What Our Clients Say</h2>
+            <p class="text-gray-400">Read verified reviews from clients who trust Rosebowl Salon for their personal care.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Review 1 -->
+            <div class="bg-cardbg border border-softgray rounded-2xl p-8 flex flex-col justify-between relative">
+                <div>
+                    <div class="flex text-amber-400 text-sm gap-1 mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 text-sm italic mb-6">"Rosebowl is hands down the best salon I've ever visited. The stylists actually listen to what you want, and the atmosphere is so luxurious and welcoming!"</p>
+                </div>
+                <div class="flex items-center gap-3 pt-4 border-t border-softgray">
+                    <div class="w-10 h-10 rounded-full bg-roseaccent/20 text-roseaccent font-bold flex items-center justify-center">S</div>
+                    <div>
+                        <h4 class="font-bold text-sm text-white">Samantha Miller</h4>
+                        <span class="text-xs text-gray-400">Verified Client</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Review 2 -->
+            <div class="bg-cardbg border border-softgray rounded-2xl p-8 flex flex-col justify-between relative">
+                <div>
+                    <div class="flex text-amber-400 text-sm gap-1 mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 text-sm italic mb-6">"Incredible barbershop experience. Clean razor line-ups, great hot towel treatment, and extremely professional barbers. Highly recommended!"</p>
+                </div>
+                <div class="flex items-center gap-3 pt-4 border-t border-softgray">
+                    <div class="w-10 h-10 rounded-full bg-roseaccent/20 text-roseaccent font-bold flex items-center justify-center">D</div>
+                    <div>
+                        <h4 class="font-bold text-sm text-white">David Harrison</h4>
+                        <span class="text-xs text-gray-400">Verified Client</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Review 3 -->
+            <div class="bg-cardbg border border-softgray rounded-2xl p-8 flex flex-col justify-between relative">
+                <div>
+                    <div class="flex text-amber-400 text-sm gap-1 mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 text-sm italic mb-6">"The spa treatments are pure bliss! I booked the Luxury Spa Package and left feeling completely refreshed and stress-free. Wonderful service!"</p>
+                </div>
+                <div class="flex items-center gap-3 pt-4 border-t border-softgray">
+                    <div class="w-10 h-10 rounded-full bg-roseaccent/20 text-roseaccent font-bold flex items-center justify-center">E</div>
+                    <div>
+                        <h4 class="font-bold text-sm text-white">Elena Rostova</h4>
+                        <span class="text-xs text-gray-400">Verified Client</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Operating Hours Section -->
+    <section id="contact" class="py-24 bg-cardbg/50 border-t border-softgray/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Hours & Info -->
+                <div>
+                    <span class="text-roseaccent text-xs font-bold tracking-widest uppercase bg-roseaccent/10 px-3 py-1 rounded-full border border-roseaccent/20">Visit Us</span>
+                    <h2 class="text-3xl font-bold text-white mt-4 mb-6">Hours & Location</h2>
+                    <p class="text-gray-400 mb-8">Drop by our salon or get in touch with our team for bookings, consultations, or inquiries.</p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-cardbg border border-softgray flex items-center justify-center text-roseaccent shrink-0">
+                                <i class="fa-solid fa-clock text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white mb-1">Operating Hours</h4>
+                                <p class="text-sm text-gray-400"><strong>Monday – Friday:</strong> 10:00 AM – 7:00 PM</p>
+                                <p class="text-sm text-gray-400"><strong>Saturday:</strong> 10:00 AM – 1:00 PM</p>
+                                <p class="text-sm text-roseaccent font-semibold mt-1">Sunday: Online Appointment Only</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-cardbg border border-softgray flex items-center justify-center text-roseaccent shrink-0">
+                                <i class="fa-solid fa-phone text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white mb-1">Direct Phone</h4>
+                                <p class="text-sm text-gray-400"><a href="tel:03055126551" class="hover:text-roseaccent transition-colors font-bold text-white text-lg">030-55126551</a></p>
+                                <p class="text-xs text-gray-500 mt-0.5">Call us during business hours to speak with our receptionist.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-cardbg border border-softgray flex items-center justify-center text-roseaccent shrink-0">
+                                <i class="fa-solid fa-location-dot text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white mb-1">Location</h4>
+                                <p class="text-sm text-gray-400">Rosebowl Salon Suite, Prime District</p>
+                                <p class="text-xs text-gray-500 mt-0.5">Complimentary parking available for all clients.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Inquiry / Message Card -->
+                <div class="bg-cardbg border border-softgray rounded-3xl p-8 shadow-2xl">
+                    <h3 class="text-xl font-bold text-white mb-2">Send Us a Message</h3>
+                    <p class="text-sm text-gray-400 mb-6">Have a specific request or question? Drop us a line below.</p>
+                    
+                    <form onsubmit="handleInquiry(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase text-gray-400 mb-2">Your Name</label>
+                            <input type="text" required class="w-full bg-darkbg border border-softgray rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-roseaccent transition-colors" placeholder="John Doe">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase text-gray-400 mb-2">Phone Number</label>
+                            <input type="tel" required class="w-full bg-darkbg border border-softgray rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-roseaccent transition-colors" placeholder="030-XXXXXXXX">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase text-gray-400 mb-2">Message</label>
+                            <textarea rows="4" required class="w-full bg-darkbg border border-softgray rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-roseaccent transition-colors" placeholder="How can we help you?"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-roseaccent hover:bg-rose-600 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-roseaccent/30 transition-all">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-darkbg border-t border-softgray/50 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-full bg-roseaccent flex items-center justify-center text-white font-bold text-sm">
+                    R
+                </div>
+                <span class="font-bold tracking-wider text-white">ROSEBOWL SALON</span>
+            </div>
+
+            <div class="flex items-center gap-6 text-gray-400 text-sm">
+                <a href="#home" class="hover:text-roseaccent transition-colors">Home</a>
+                <a href="#services" class="hover:text-roseaccent transition-colors">Services</a>
+                <a href="#gallery" class="hover:text-roseaccent transition-colors">Portfolio</a>
+                <a href="#contact" class="hover:text-roseaccent transition-colors">Contact</a>
+            </div>
+
+            <div class="flex items-center gap-4 text-lg">
+                <a href="https://www.instagram.com/rosebowlsalon/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-cardbg border border-softgray flex items-center justify-center text-gray-300 hover:text-roseaccent hover:border-roseaccent transition-all">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/rose.hamm.7796" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-cardbg border border-softgray flex items-center justify-center text-gray-300 hover:text-roseaccent hover:border-roseaccent transition-all">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+                <a href="tel:03055126551" class="w-10 h-10 rounded-full bg-cardbg border border-softgray flex items-center justify-center text-gray-300 hover:text-roseaccent hover:border-roseaccent transition-all">
+                    <i class="fa-solid fa-phone"></i>
+                </a>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 pt-8 border-t border-softgray/30 text-center text-xs text-gray-500">
+            &copy; 2026 Rosebowl Salon. All Rights Reserved. Designed with modern excellence.
+        </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <!-- Interactive Booking Modal -->
+    <div id="booking-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-cardbg border border-softgray rounded-3xl max-w-lg w-full p-8 relative shadow-2xl animate-in fade-in zoom-in duration-200">
+            <button onclick="closeBookingModal()" class="absolute top-6 right-6 text-gray-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="mb-6">
+                <span class="text-roseaccent text-xs font-bold tracking-widest uppercase">Quick Reservation</span>
+                <h3 class="text-2xl font-bold text-white mt-1">Book Your Appointment</h3>
+                <p class="text-xs text-gray-400 mt-1">Fill out the details below and our team will confirm your slot instantly.</p>
+            </div>
+
+            <form onsubmit="handleBookingSubmission(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-gray-400 mb-1.5">Select Service</label>
+                    <select id="modal-service" required class="w-full bg-darkbg border border-softgray rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-roseaccent transition-colors">
+                        <option value="" disabled selected>Choose a service</option>
+                        <optgroup label="Hair Styling">
+                            <option value="Signature Haircut & Style ($65)">Signature Haircut & Style ($65)</option>
+                            <option value="Full Color & Highlights ($140+)">Full Color & Highlights ($140+)</option>
+                            <option value="Keratin Smoothing Treatment ($200+)">Keratin Smoothing Treatment ($200+)</option>
+                        </optgroup>
+                        <optgroup label="Barbershop">
+                            <option value="Classic Gentlemen's Cut ($45)">Classic Gentlemen's Cut ($45)</option>
+                            <option value="Hot Towel Beard Trim ($35)">Hot Towel Beard Trim ($35)</option>
+                            <option value="The Ultimate Royal Combo ($75)">The Ultimate Royal Combo ($75)</option>
+                        </optgroup>
+                        <optgroup label="Spa & Treatments">
+                            <option value="Rejuvenating Facial ($85)">Rejuvenating Facial ($85)</option>
+                            <option value="Aromatherapy Scalp Massage ($50)">Aromatherapy Scalp Massage ($50)</option>
+                            <option value="Rosebowl Luxury Spa Package ($160)">Rosebowl Luxury Spa Package ($160)</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-gray-400 mb-1.5">Preferred Date</label>
+                        <input type="date" required class="w-full bg-darkbg border border-softgray rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-roseaccent transition-colors">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-gray-400 mb-1.5">Preferred Time</label>
+                        <select required class="w-full bg-darkbg border border-softgray rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-roseaccent transition-colors">
+                            <option value="" disabled selected>Select time</option>
+                            <option value="10:00 AM">10:00 AM</option>
+                            <option value="11:30 AM">11:30 AM</option>
+                            <option value="01:00 PM">01:00 PM</option>
+                            <option value="02:30 PM">02:30 PM</option>
+                            <option value="04:00 PM">04:00 PM</option>
+                            <option value="05:30 PM">05:30 PM</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-gray-400 mb-1.5">Full Name</label>
+                        <input type="text" required placeholder="Jane Doe" class="w-full bg-darkbg border border-softgray rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-roseaccent transition-colors">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-gray-400 mb-1.5">Phone Number</label>
+                        <input type="tel" required placeholder="030-XXXXXXXX" class="w-full bg-darkbg border border-softgray rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-roseaccent transition-colors">
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-roseaccent hover:bg-rose-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-roseaccent/30 transition-all mt-4">
+                    Confirm Appointment Request
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            menu.classList.toggle('hidden');
+            if (menu.classList.contains('hidden')) {
+                icon.className = "fa-solid fa-bars";
+            } else {
+                icon.className = "fa-solid fa-xmark";
+            }
+        }
+
+        // Service Tab Switching
+        function switchTab(category) {
+            const panels = document.querySelectorAll('.service-panel');
+            panels.forEach(panel => panel.classList.add('hidden'));
+
+            const tabs = ['hair', 'barber', 'spa'];
+            tabs.forEach(tab => {
+                const btn = document.getElementById(`tab-${tab}`);
+                if (tab === category) {
+                    btn.className = "px-6 py-3 rounded-full text-sm font-semibold transition-all bg-roseaccent text-white shadow-lg shadow-roseaccent/20";
+                } else {
+                    btn.className = "px-6 py-3 rounded-full text-sm font-semibold transition-all bg-cardbg border border-softgray text-gray-300 hover:text-white";
+                }
+            });
+
+            document.getElementById(`content-${category}`).classList.remove('hidden');
+        }
+
+        // Booking Modal Management
+        function openBookingModal() {
+            document.getElementById('booking-modal').classList.remove('hidden');
+            document.getElementById('booking-modal').classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function openBookingModalService(serviceName, price) {
+            openBookingModal();
+            const selectEl = document.getElementById('modal-service');
+            for (let i = 0; i < selectEl.options.length; i++) {
+                if (selectEl.options[i].value.includes(serviceName)) {
+                    selectEl.selectedIndex = i;
+                    break;
+                }
+            }
+        }
+
+        function closeBookingModal() {
+            document.getElementById('booking-modal').classList.remove('flex');
+            document.getElementById('booking-modal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Notification Banner
+        function showNotification(title, desc) {
+            const notif = document.getElementById('notification');
+            document.getElementById('notif-title').innerText = title;
+            document.getElementById('notif-desc').innerText = desc;
+
+            notif.classList.remove('translate-x-full');
+            setTimeout(() => {
+                notif.classList.add('translate-x-full');
+            }, 4000);
+        }
+
+        // Form Handlers
+        function handleBookingSubmission(e) {
+            e.preventDefault();
+            closeBookingModal();
+            showNotification("Appointment Requested!", "We have received your booking and will call 030-55126551 to confirm.");
+            e.target.reset();
+        }
+
+        function handleInquiry(e) {
+            e.preventDefault();
+            showNotification("Message Sent!", "Thank you for reaching out. Our team will get back to you shortly.");
+            e.target.reset();
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('booking-modal');
+            if (event.target === modal) {
+                closeBookingModal();
+            }
+        }
+    </script>
 </body>
 </html>
