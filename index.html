@@ -449,15 +449,16 @@
         </div>
     </section>
 
-    <!-- Testimonials & Reviews Section -->
+    
+    <!-- Testimonials & Interactive Review Submission Section -->
     <section id="testimonials" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-16">
-            <span class="text-roseaccent text-xs font-bold tracking-widest uppercase bg-roseaccent/10 px-3 py-1 rounded-full border border-roseaccent/20">Testimonials</span>
+            <span class="text-roseaccent text-xs font-bold tracking-widest uppercase bg-roseaccent/10 px-3 py-1 rounded-full border border-roseaccent/20">Testimonials & Reviews</span>
             <h2 class="text-3xl sm:text-4xl font-bold text-white mt-4 mb-4">What Our Clients Say</h2>
-            <p class="text-gray-400">Read verified reviews from clients who trust Rosebowl Hair Berlin.</p>
+            <p class="text-gray-400">Read verified reviews or leave your own feedback about your experience at Rosebowl Hair Berlin.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
             <div class="bg-cardbg border border-softgray rounded-2xl p-8 flex flex-col justify-between relative">
                 <div>
                     <div class="flex text-amber-400 text-sm gap-1 mb-4">
@@ -503,6 +504,41 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Leave a Review Form Box -->
+        <div class="bg-cardbg border border-roseaccent/40 rounded-3xl p-8 sm:p-12 shadow-2xl max-w-3xl mx-auto">
+            <div class="text-center mb-8">
+                <span class="text-roseaccent text-xs font-bold tracking-widest uppercase">We Value Your Feedback</span>
+                <h3 class="text-2xl font-bold text-white mt-1">Leave a Review</h3>
+                <p class="text-sm text-gray-400 mt-1">Tell us about your experience at Rosebowl Hair Berlin!</p>
+            </div>
+
+            <form onsubmit="handleReviewSubmission(event)" class="space-y-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-gray-400 mb-2">Your Name</label>
+                        <input type="text" required class="w-full bg-darkbg border border-softgray rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-roseaccent transition-colors" placeholder="Alex Smith">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-gray-400 mb-2">Rating</label>
+                        <select required class="w-full bg-darkbg border border-softgray rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-roseaccent transition-colors">
+                            <option value="5">⭐⭐⭐⭐⭐ (5/5 Stars)</option>
+                            <option value="4">⭐⭐⭐⭐ (4/5 Stars)</option>
+                            <option value="3">⭐⭐⭐ (3/5 Stars)</option>
+                            <option value="2">⭐⭐ (2/5 Stars)</option>
+                            <option value="1">⭐ (1/5 Stars)</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-gray-400 mb-2">Your Review</label>
+                    <textarea rows="4" required class="w-full bg-darkbg border border-softgray rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-roseaccent transition-colors" placeholder="How was your haircut, styling, or massage?"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-roseaccent hover:bg-amber-500 text-black font-bold py-4 rounded-xl shadow-lg shadow-roseaccent/20 transition-all">
+                    Submit Review
+                </button>
+            </form>
         </div>
     </section>
 
